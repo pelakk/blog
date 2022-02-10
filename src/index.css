@@ -24,3 +24,27 @@ code {
   background-position: center left;
   color: white;
 }
+
+.post_hero {
+  color: white;
+}
+
+.post-container-content {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 5; /* number of lines to show */
+          line-clamp: 5; 
+  -webkit-box-orient: vertical;
+}
+
+.post-container {
+  transition: transform 300ms;
+}
+
+.post-container:hover {
+  transform: scale(1.04);
+  opacity: 1;
+}
+
+
