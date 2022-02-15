@@ -18,9 +18,11 @@ const LoginContainer = () => {
 const LogoutContainer = ({ onClick }) => {
   const dispatch = useDispatch();
   const { login, logout } = bindActionCreators(actionCreators, dispatch);
+  const stateEmail = useSelector((state) => state.email);
 
   return (
     <div>
+      <p className="text-lg font-semibold">{stateEmail}</p>
       <Link to="/add-post">
         <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-3">
           Add post

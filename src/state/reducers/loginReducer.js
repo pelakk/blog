@@ -1,6 +1,6 @@
 const initialState = false;
 
-const reducer = (state = initialState, action) => {
+const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case "login":
       return true;
@@ -11,4 +11,4 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export default reducer;
+export default loginReducer;

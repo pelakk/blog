@@ -4,19 +4,28 @@ import "../App.css";
 import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 function RegisterPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [registered, setRegistered] = useState(false);
+  const [time, setTime] = useState(10);
 
   initializeApp(firebaseConfig);
   const auth = getAuth();
+
+  let navigate = useNavigate();
 
   const register = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        setRegistered(true);
+        setInterval(() => {
+          setTime((prevTime) => prevTime - 1);
+        }, 1000);
+        setTimeout(() => navigate("/"), 10000);
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -84,6 +93,11 @@ function RegisterPage() {
                 Register
               </button>
             </div>
+            <p className="text-green-600 text-bold font-semibold text-2xl text-center">
+              {registered
+                ? `Registered, you will be redirected to home page in ${time} seconds where you can log in`
+                : ""}
+            </p>
           </div>
         </div>
       </div>

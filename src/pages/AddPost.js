@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
+import { useNavigate } from "react-router-dom";
 
 function getWindowDimensions() {
   const { innerWidth: width, innerHeight: height } = window;
@@ -36,6 +37,8 @@ function AddPost() {
 
   const [completed, setCompleted] = useState(false);
 
+  let navigate = useNavigate();
+
   const submit = async (e) => {
     e.preventDefault();
 
@@ -48,7 +51,12 @@ function AddPost() {
       await fetch("https://blog-api-matuszynski.herokuapp.com/posts", {
         method: "POST",
         body: formData,
-      }).then(setCompleted(true));
+      }).then(() => {
+        setCompleted(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 3000);
+      });
     } else {
       alert("You have to provide all the informations!");
     }
@@ -126,7 +134,9 @@ function AddPost() {
               />
             </div>
             <p className="text-green-600 text-bold font-semibold text-2xl text-center">
-              {completed ? "Post added, go to home page to see it" : ""}
+              {completed
+                ? "Post added, you will be redirected to home page in 3 seconds"
+                : ""}
             </p>
           </form>
         </div>

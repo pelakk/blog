@@ -17,19 +17,17 @@ function App() {
 
   return (
     <Router>
-      <div style={{ background: "rgb(250, 250, 250)" }}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route
-            path="/add-post"
-            element={state ? <AddPost /> : <Navigate to="/login" />}
-          />
-          <Route path="/post/:id" element={<Post />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/register" element={<RegisterPage />} />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </div>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route
+          path="/add-post"
+          element={state ? <AddPost /> : <Navigate to="/login" />}
+        />
+        <Route path="/post/:id" element={<Post />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
     </Router>
   );
 }

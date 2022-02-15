@@ -13,3 +13,12 @@ export const logout = () => {
     });
   };
 };
+
+export const setEmail = (email) => {
+  return (dispatch) => {
+    dispatch({
+      type: "setEmail",
+      payload: email,
+    });
+  };
+};

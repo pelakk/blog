@@ -4,32 +4,33 @@ import { initializeApp } from "firebase/app";
 import firebaseConfig from "../firebaseConfig";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from ".././state/index";
 import { useNavigate } from "react-router-dom";
 
 function LoginPage() {
-  const [email, setEmail] = useState("");
+  const [email, _setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   initializeApp(firebaseConfig);
-  let navigate = useNavigate();
-
   const auth = getAuth();
 
-  const state = useSelector((state) => state.login);
+  let navigate = useNavigate();
+
   const dispatch = useDispatch();
-  const { login, logout } = bindActionCreators(actionCreators, dispatch);
+  const { login, logout, setEmail } = bindActionCreators(
+    actionCreators,
+    dispatch
+  );
 
   const _login = () => {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
         login();
-        navigate("/home");
+        setEmail(user.email);
+        navigate("/");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -68,7 +69,7 @@ function LoginPage() {
                 id="email"
                 type="email"
                 placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => _setEmail(e.target.value)}
               />
             </div>
             <div className="mb-4">

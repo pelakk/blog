@@ -3,6 +3,7 @@ import "../App.css";
 import { useParams } from "react-router-dom";
 import PostHeroSection from "../components/PostHeroSection";
 import Comment from "../components/Comment";
+import { useSelector } from "react-redux";
 
 function Post() {
   const { id } = useParams();
@@ -35,10 +36,13 @@ function Post() {
     fetchData();
   }, []);
 
+  const stateEmail = useSelector((state) => state.email);
+  const logged = useSelector((state) => state.login);
+
   const submit = (e) => {
-    if (email !== undefined && commentContent !== undefined) {
+    if (commentContent !== undefined) {
       const formData = new FormData();
-      formData.append("email", email);
+      formData.append("email", stateEmail);
       formData.append("content", commentContent);
       formData.append("postId", id);
 
@@ -48,7 +52,7 @@ function Post() {
       });
     } else {
       e.preventDefault();
-      alert("You have to provide all the informations!");
+      alert("Blank comments not allowed!");
     }
   };
 
@@ -85,48 +89,39 @@ function Post() {
       </div>
 
       <div className="aspect-ratio mt-10">
-        <div className="container container xl:w-[60%] w-[90%] m-auto">
-          <form
-            className="shadow-md rounded px-8 pt-6 pb-8 mb-4"
-            onSubmit={submit}
-          >
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="title"
-              >
-                Email
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username"
-                type="email"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
-            <div className="mb-4">
-              <label
-                className="block text-gray-700 text-sm font-bold mb-2"
-                htmlFor="content"
-              >
-                Post content
-              </label>
-              <textarea
-                className="shadow min-h-[100px] appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="content"
-                placeholder="Comment content"
-                onChange={(e) => setCommentContent(e.target.value)}
-              />
-            </div>
-            <div className="mb-4">
-              <input
-                type="submit"
-                value="Comment"
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
-              />
-            </div>
-          </form>
+        <div className="container container xl:w-[60%] w-[90%] m-auto relative">
+          {logged ? (
+            <form
+              className="shadow-md rounded px-8 pt-6 pb-8 mb-4"
+              onSubmit={submit}
+            >
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-sm font-bold mb-2"
+                  htmlFor="content"
+                >
+                  Post content
+                </label>
+                <textarea
+                  className="shadow min-h-[100px] appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="content"
+                  placeholder="Comment content"
+                  onChange={(e) => setCommentContent(e.target.value)}
+                />
+              </div>
+              <div className="mb-4">
+                <input
+                  type="submit"
+                  value="Comment"
+                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer"
+                />
+              </div>
+            </form>
+          ) : (
+            <p className="text-lg text-black font-semibold">
+              Only logged users can comment
+            </p>
+          )}
         </div>
       </div>
 
