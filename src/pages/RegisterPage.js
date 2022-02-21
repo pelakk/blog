@@ -20,7 +20,6 @@ function RegisterPage() {
   const register = () => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        const user = userCredential.user;
         setRegistered(true);
         setInterval(() => {
           setTime((prevTime) => prevTime - 1);

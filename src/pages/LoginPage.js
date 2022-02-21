@@ -19,10 +19,7 @@ function LoginPage() {
   let navigate = useNavigate();
 
   const dispatch = useDispatch();
-  const { login, logout, setEmail } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const { login, setEmail } = bindActionCreators(actionCreators, dispatch);
 
   const _login = () => {
     signInWithEmailAndPassword(auth, email, password)

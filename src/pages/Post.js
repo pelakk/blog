@@ -11,7 +11,6 @@ function Post() {
   const [postData, setPostData] = useState([]);
   const [commentData, setCommentData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [email, setEmail] = useState();
   const [commentContent, setCommentContent] = useState();
 
   const API_url = "https://blog-api-matuszynski.herokuapp.com";
