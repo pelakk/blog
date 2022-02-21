@@ -16,7 +16,9 @@ function PostContainer({ id, title, content, image }) {
             height: 240,
           }}
         />
-        <h1 className="text-2xl font-semibold my-3">{title}</h1>
+        <h1 className="text-2xl font-semibold my-3 post-container-title">
+          {title}
+        </h1>
         <h2 className="text-sm post-container-content">{content}</h2>
       </div>
     </Link>
