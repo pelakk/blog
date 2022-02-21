@@ -17,7 +17,7 @@ const LoginContainer = () => {
 
 const LogoutContainer = ({ onClick }) => {
   const dispatch = useDispatch();
-  const { login, logout } = bindActionCreators(actionCreators, dispatch);
+  const { logout } = bindActionCreators(actionCreators, dispatch);
   const stateEmail = useSelector((state) => state.email);
 
   return (
