@@ -7,7 +7,6 @@ function Home() {
     <div>
       <HeroSection />
       <PostsSection />
-      <div className="h-28"></div>
     </div>
   );
 }
