@@ -15,7 +15,7 @@ function Pagination({ postsPerPage, totalPosts, paginate }) {
       >
         <ul className="inline-flex items-center -space-x-px">
           {pages.map((page) => (
-            <li key={page}>
+            <li className="px-1" key={page}>
               <a
                 href="#"
                 onClick={() => paginate(page)}

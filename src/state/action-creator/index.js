@@ -22,3 +22,12 @@ export const setEmail = (email) => {
     });
   };
 };
+
+export const setPage = (page) => {
+  return (dispatch) => {
+    dispatch({
+      type: "setPage",
+      payload: page,
+    });
+  };
+};
